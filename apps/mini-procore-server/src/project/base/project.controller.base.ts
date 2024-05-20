@@ -27,6 +27,9 @@ export class ProjectControllerBase {
   constructor(protected readonly service: ProjectService) {}
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Project })
+  @swagger.ApiBody({
+    type: ProjectCreateInput,
+  })
   async createProject(
     @common.Body() data: ProjectCreateInput
   ): Promise<Project> {
@@ -80,6 +83,9 @@ export class ProjectControllerBase {
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Project })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
+  @swagger.ApiBody({
+    type: ProjectUpdateInput,
+  })
   async updateProject(
     @common.Param() params: ProjectWhereUniqueInput,
     @common.Body() data: ProjectUpdateInput
